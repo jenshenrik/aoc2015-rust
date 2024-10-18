@@ -1,8 +1,10 @@
+use adventcoin::mine;
 use navigation::{find_basement, read_directions};
 use presents::{calculate_gift_wrapping, calculate_ribbon, unwrap_present};
 use santa::{collaborate, get_unique_visits_combined, Santa};
 use util::{open_file, read_lines};
 
+mod adventcoin;
 mod navigation;
 mod presents;
 mod santa;
@@ -14,6 +16,8 @@ fn main() {
     day2();
 
     day3();
+
+    day4();
 }
 
 fn day1() {
@@ -94,4 +98,25 @@ fn day3_2(directions: &str) {
     collaborate(&mut santa, &mut robo_santa, directions);
     let unique_visits = get_unique_visits_combined(&santa, &robo_santa);
     println!("{unique_visits} unique visits by Santa and Robo Santa");
+}
+
+fn day4() {
+    println!("##### DAY 4 #####");
+
+    day4_1();
+    day4_2();
+
+    println!(" ");
+}
+
+fn day4_1() {
+    let coin = mine("iwrupvqb", "00000");
+
+    println!("{coin}");
+}
+
+fn day4_2() {
+    let coin = mine("iwrupvqb", "000000");
+
+    println!("{coin}");
 }
