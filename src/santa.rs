@@ -36,6 +36,10 @@ impl Santa {
         self.visited_houses.len()
     }
 
+    pub fn houses_visited(&self) -> Vec<&(i32, i32)> {
+        Vec::from_iter(self.visited_houses.keys())
+    }
+
     pub fn move_santa(&mut self, d: &str) {
         for c in d.chars() {
             self.move_santa_single(c);
@@ -66,9 +70,29 @@ impl Default for Santa {
     }
 }
 
+pub fn collaborate(santa1: &mut Santa, santa2: &mut Santa, directions: &str) {
+    for (i, d) in directions.chars().enumerate() {
+        if i % 2 == 0 {
+            santa1.move_santa_single(d);
+        } else {
+            santa2.move_santa_single(d);
+        }
+    }
+}
+
+pub fn get_unique_visits_combined(santa1: &Santa, santa2: &Santa) -> usize {
+    let mut visits = [santa1.houses_visited(), santa2.houses_visited()].concat();
+    visits.sort();
+    visits.dedup();
+
+    visits.len()
+}
+
 #[cfg(test)]
 pub mod tests {
     use crate::santa::Santa;
+
+    use super::{collaborate, get_unique_visits_combined};
 
     #[test]
     fn test_move_santa_1() {
@@ -95,5 +119,38 @@ pub mod tests {
         let result = santa.visited_houses.len();
 
         assert_eq!(result, 2);
+    }
+
+    #[test]
+    fn test_collab_1() {
+        let mut santa = Santa::new();
+        let mut robo_santa = Santa::new();
+
+        collaborate(&mut santa, &mut robo_santa, "^v");
+        let result = get_unique_visits_combined(&santa, &robo_santa);
+
+        assert_eq!(result, 3);
+    }
+
+    #[test]
+    fn test_collab_2() {
+        let mut santa = Santa::new();
+        let mut robo_santa = Santa::new();
+
+        collaborate(&mut santa, &mut robo_santa, "^>v<");
+        let result = get_unique_visits_combined(&santa, &robo_santa);
+
+        assert_eq!(result, 3);
+    }
+
+    #[test]
+    fn test_collab_3() {
+        let mut santa = Santa::new();
+        let mut robo_santa = Santa::new();
+
+        collaborate(&mut santa, &mut robo_santa, "^v^v^v^v^v");
+        let result = get_unique_visits_combined(&santa, &robo_santa);
+
+        assert_eq!(result, 11);
     }
 }

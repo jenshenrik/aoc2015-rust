@@ -1,5 +1,14 @@
 use std::cmp::min;
 
+pub fn unwrap_present(present: &str) -> (i32, i32, i32) {
+    let splits: Vec<&str> = present.split('x').collect();
+    let w = splits[0].parse::<i32>().unwrap();
+    let l = splits[1].parse::<i32>().unwrap();
+    let h = splits[2].parse::<i32>().unwrap();
+
+    (w, l, h)
+}
+
 pub fn calculate_gift_wrapping(w: i32, l: i32, h: i32) -> i32 {
     let (side_a, side_b, side_c) = calculate_sides(w, l, h);
     let min_side = min(side_a, min(side_b, side_c));
