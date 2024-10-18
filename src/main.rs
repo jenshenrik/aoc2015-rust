@@ -34,12 +34,12 @@ fn day1() {
 
 fn day1_1(directions: &str) {
     let floor = read_directions(directions);
-    println!("Santa ends on floor {floor}");
+    println!("1: {floor}");
 }
 
 fn day1_2(directions: &str) {
     let basement = find_basement(directions);
-    println!("Santa first enters the basement after {basement} steps");
+    println!("2: {basement}");
 }
 
 fn day2() {
@@ -60,7 +60,7 @@ fn day2_1(presents: &Vec<String>) {
         let (w, l, h) = unwrap_present(p);
         total_wrapping_paper += calculate_gift_wrapping(w, l, h);
     }
-    println!("{total_wrapping_paper} feet of wrapping paper used");
+    println!("1: {total_wrapping_paper}");
 }
 
 fn day2_2(presents: &Vec<String>) {
@@ -69,7 +69,7 @@ fn day2_2(presents: &Vec<String>) {
         let (w, l, h) = unwrap_present(p);
         total_ribbon += calculate_ribbon(w, l, h);
     }
-    println!("{total_ribbon} feet of ribbon used");
+    println!("2: {total_ribbon}");
 }
 
 fn day3() {
@@ -88,7 +88,7 @@ fn day3_1(directions: &str) {
     santa.move_santa(directions);
     let visits = santa.visits();
 
-    println!("Santa visits {visits} houses");
+    println!("1: {visits}");
 }
 
 fn day3_2(directions: &str) {
@@ -97,7 +97,7 @@ fn day3_2(directions: &str) {
 
     collaborate(&mut santa, &mut robo_santa, directions);
     let unique_visits = get_unique_visits_combined(&santa, &robo_santa);
-    println!("{unique_visits} unique visits by Santa and Robo Santa");
+    println!("2: {unique_visits}");
 }
 
 fn day4() {
@@ -112,11 +112,11 @@ fn day4() {
 fn day4_1() {
     let coin = mine("iwrupvqb", "00000");
 
-    println!("{coin}");
+    println!("1: {coin}");
 }
 
 fn day4_2() {
     let coin = mine("iwrupvqb", "000000");
 
-    println!("{coin}");
+    println!("2: {coin}");
 }
