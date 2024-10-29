@@ -1,10 +1,12 @@
 use adventcoin::mine;
+use list::{better_is_nice, is_nice};
 use navigation::{find_basement, read_directions};
 use presents::{calculate_gift_wrapping, calculate_ribbon, unwrap_present};
 use santa::{collaborate, get_unique_visits_combined, Santa};
 use util::{open_file, read_lines};
 
 mod adventcoin;
+mod list;
 mod navigation;
 mod presents;
 mod santa;
@@ -18,6 +20,8 @@ fn main() {
     day3();
 
     day4();
+
+    day5();
 }
 
 fn day1() {
@@ -119,4 +123,39 @@ fn day4_2() {
     let coin = mine("iwrupvqb", "000000");
 
     println!("2: {coin}");
+}
+
+fn day5() {
+    let list = read_lines("input5.txt");
+
+    println!("##### DAY 5 #####");
+
+    day5_1(&list);
+    day5_2(&list);
+
+    println!(" ");
+}
+
+fn day5_1(list: &Vec<String>) {
+    let mut count = 0;
+
+    for line in list {
+        if is_nice(line) {
+            count += 1;
+        }
+    }
+
+    println!("1. {count}");
+}
+
+fn day5_2(list: &Vec<String>) {
+    let mut count = 0;
+
+    for line in list {
+        if better_is_nice(line) {
+            count += 1;
+        }
+    }
+
+    println!("2. {count}");
 }
